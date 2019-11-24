@@ -1,0 +1,93 @@
+
+{
+  "AWSEBDockerrunVersion": 2,
+  "volumes": [
+    {
+      "name": "insight-app",
+      "host": {
+        "sourcePath": "/var/app/current/"
+      }
+    },
+    {
+      "name": "nginx-proxy-conf",
+      "host": {
+        "sourcePath": "/var/app/current/proxy/conf.d"
+      }
+    },
+    {
+      "name": "insight-shared",
+      "host": {
+        "sourcePath": "/efsfiles/hdf5"
+      }
+    },
+    {
+      "name": "insight-shared2",
+      "host": {
+        "sourcePath": "/efsfiles/pickle"
+      }
+    }
+  ],
+  "containerDefinitions": [
+    {
+      "name": "insight-app",
+      "image": "346625874447.dkr.ecr.us-east-1.amazonaws.com/kataloninsight:latest",
+      "essential": true,
+      "memory": 2408,
+      "portMappings": [
+        {
+          "hostPort": 5000,
+          "containerPort": 8000
+        }
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "insight-app",
+          "containerPath": "/workspace"
+        },
+        {
+          "sourceVolume": "insight-shared",
+          "containerPath": "/workspace/hdf5files"
+        },
+        {
+          "sourceVolume": "insight-shared2",
+          "containerPath": "/workspace/picklefiles"
+        }, 
+        {
+          "sourceVolume": "awseb-logs-insight-app",
+          "containerPath": "/var/log/insight-app"
+        }
+      ]
+    },
+    {
+      "name": "nginx-proxy",
+      "image": "nginx",
+      "essential": true,
+      "memory": 128,
+      "portMappings": [
+        {
+          "hostPort": 80,
+          "containerPort": 80
+        }
+      ],
+      "links": [
+        "insight-app"
+      ],
+      "mountPoints": [
+        {
+          "sourceVolume": "insight-app",
+          "containerPath": "/workspace",
+          "readOnly": true
+        },
+        {
+          "sourceVolume": "awseb-logs-nginx-proxy",
+          "containerPath": "/var/log/nginx"
+        },
+        {
+          "sourceVolume": "nginx-proxy-conf",
+          "containerPath": "/etc/nginx/conf.d",
+          "readOnly": true
+        }
+      ]
+    }
+  ]
+}

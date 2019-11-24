@@ -1,0 +1,20 @@
+version: '3'
+services:
+  insights:
+    image: insights
+    ports:
+      - "8000:8000"
+    volumes:
+      - ../../ki_django:/workspace/insights
+    working_dir: /workspace/insights
+    ipc: host
+    # restart: always     # or "unless-stopped"
+    environment:
+      - PYTHONIOENCODING=utf-8
+      - KIT_PORT
+      - KI_HOST
+      - KI_KITDB
+      - KI_PASSWORD
+      - KI_USER
+volumes:
+  insights:
