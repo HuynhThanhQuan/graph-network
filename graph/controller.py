@@ -35,14 +35,6 @@ def analyze(request):
         report = graph_analyzer.analyze_bundle(data_bundles)
         logger.info('Request analyze big data {}'.format(datetime.now() - start))
         return response.Response(report.cluster_docids_map)
-        # logger.info('Analyze Performance Saver')
-        # perf_saver = PerformanceSaver(t_analysis.graph_manager)
-        # logger.info('Constructing Graph objects')
-        # t_ka_graph = KatalonGraph(perf_saver=perf_saver)
-        # t_di_graph, t_position = t_ka_graph.get_word2vector_position_3d(report.data_report.preprocessed)
-        # t_ka_graph.plot_3d_network(report.data_report.preprocessed, t_position)
-        # logger.info('Request analyze big data {}'.format(datetime.now() - start))
-        # return Response('Request finished. Pushing Plotly graph to JavaScript Web Browser', status.HTTP_200_OK)
     else:
         return http.HttpResponseForbidden('Permission denied')
 
