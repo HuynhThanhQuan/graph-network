@@ -43,7 +43,7 @@ class GraphViz:
     def rescale_node_size(node_sizes):
         node_sizes = np.array(node_sizes)
         min_value, max_value = min(node_sizes), max(node_sizes)
-        _range = max_value - min_value
+        _range = max(max_value - min_value, 1)
         return node_sizes / _range * GraphViz.NODE_MAX_SIZE + GraphViz.NODE_MIN_SIZE
 
     @staticmethod
@@ -55,7 +55,7 @@ class GraphViz:
 
     @staticmethod
     def get_text_node_info(digraph, node):
-        return 'ID:{} - Freq:{} - Cons:{}'.format(node, digraph.nodes()[node]['frequency'], digraph.degree[node])
+        return 'ID:{} - Freq:{} - Cons:{}'.format(node, digraph.nodes()[node].get('frequency', 1), digraph.degree[node])
 
     @staticmethod
     def init_node_traces_3d(digraph, position, colorscale='YlOrRd'):
@@ -69,7 +69,7 @@ class GraphViz:
             node_x.append(x)
             node_y.append(y)
             node_z.append(z)
-            node_size.append(digraph.nodes[node].get('frequency', 0))
+            node_size.append(digraph.nodes[node].get('frequency', 1))
             node_color.append(digraph.degree[node])
         node_trace = go.Scatter3d(x=node_x, y=node_y, z=node_z, name='All Nodes', mode='markers', hoverinfo='text',
                                   marker=dict(showscale=True, colorscale=colorscale, reversescale=True,
@@ -187,12 +187,12 @@ class GraphViz:
             x0, y0, z0 = position[edge[0]]
             x1, y1, z1 = position[edge[1]]
             go_edge = go.Scatter3d(x=[x0, x1], y=[y0, y1], z=[z0, z1],
-                                   line=dict(width=min(digraph.edges[edge[0], edge[1]]['weight'] *
+                                   line=dict(width=min(digraph.edges[edge[0], edge[1]].get('weight', 1) *
                                                        GraphViz.EDGE_SCALED_WIDTH_FACTOR,
                                                        GraphViz.EDGE_MAX_WIDTH),
                                              color='#888'),
                                    showlegend=False,
-                                   text='Connections\t{}'.format(digraph.edges[edge[0], edge[1]]['weight']),
+                                   text='Connections\t{}'.format(digraph.edges[edge[0], edge[1]].get('weight', 1)),
                                    mode='lines')
             go_edges.append(go_edge)
         return go_edges
