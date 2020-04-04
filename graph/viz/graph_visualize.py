@@ -6,7 +6,7 @@ import operator
 from sklearn import decomposition
 import collections
 from datetime import datetime
-from graph.visualize.graph_layout import Layout
+from graph.viz.graph_layout import Layout
 from algorithms.core.nlp.algorithms import Word2VectorManagement
 import logging
 import time

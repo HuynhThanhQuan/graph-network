@@ -2,7 +2,7 @@ import os
 import random
 import pandas as pd 
 import numpy as np
-from fraud_det import graph_viz
+from graph.viz import graph_visualize
 import uuid
 
 NUM_USER = 100
@@ -30,5 +30,5 @@ if __name__ == '__main__':
     user_property, user_linkage, user_label = generate_pseudo_data()
 
     # Plot
-    G = graph_viz.GraphViz()
+    G = graph_visualize.GraphViz()
     G.plot_risk_graph_3d(user_property, user_linkage, user_label)
