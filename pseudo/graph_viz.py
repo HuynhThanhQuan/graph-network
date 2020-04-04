@@ -1,5 +1,6 @@
 import networkx as nx
 import plotly.graph_objects as go
+import plotly
 import numpy as np
 import operator
 from sklearn import decomposition
@@ -56,6 +57,40 @@ class GraphViz:
     @staticmethod
     def get_text_node_info(digraph, node):
         return 'ID:{} - Freq:{} - Cons:{}'.format(node, digraph.nodes()[node].get('frequency', 1), digraph.degree[node])
+
+    @staticmethod
+    def init_risk_node_traces_3d(graph, position, node_color, colorscale=plotly.colors.sequential.Viridis):
+        node_x = []
+        node_y = []
+        node_z = []
+        node_size = []
+        for node in graph.nodes():
+            x, y, z = position[node]
+            node_x.append(x)
+            node_y.append(y)
+            node_z.append(z)
+            node_size.append(1)
+        node_trace = go.Scatter3d(x=node_x, y=node_y, z=node_z, name='All Nodes', mode='markers', hoverinfo='text',
+                                  marker=dict(showscale=True, colorscale=colorscale, reversescale=True,
+                                              size=GraphViz.rescale_node_size(node_size),
+                                              color=node_color, colorbar=dict(thickness=15,
+                                                                              title='Node Connections',
+                                                                              xanchor='left', titleside='right'),
+                                              line_width=2))
+        return node_trace
+
+    @staticmethod
+    def init_risk_edge_traces_3d(digraph, position):
+        go_edges = []
+        for edge in digraph.edges():
+            x0, y0, z0 = position[edge[0]]
+            x1, y1, z1 = position[edge[1]]
+            go_edge = go.Scatter3d(x=[x0, x1], y=[y0, y1], z=[z0, z1],
+                                   line=dict(width=0.5, color='#888'),
+                                   showlegend=False,
+                                   mode='lines')
+            go_edges.append(go_edge)
+        return go_edges
 
     @staticmethod
     def init_node_traces_3d(digraph, position, colorscale='YlOrRd'):
@@ -318,7 +353,7 @@ class GraphViz:
                 'position': position,
                 'figure': figure}
 
-    def plot_risk_graph_3d(self, user_properties, user_linkage, set_default_graph=True):
+    def plot_risk_graph_3d(self, user_properties, user_linkage, user_label, set_default_graph=True):
         """
         Construct graph visualization for Risk detection
 
@@ -337,15 +372,24 @@ class GraphViz:
         graph.add_edges_from(user_linkage)
 
         # Layout graph position
-        position = nx.random_layout(graph, dim=3)
-        node_traces = GraphViz.init_node_traces_3d(graph, position)
-        go_edges = GraphViz.init_edge_traces_3d(graph, position)
+        position = self.layout_risk_3d(user_label)
+        node_color = [0 if v == 'non' else 1 for v in user_label.values()]
+        node_traces = GraphViz.init_risk_node_traces_3d(graph, position, node_color)
+        go_edges = GraphViz.init_risk_edge_traces_3d(graph, position)
         figure = GraphViz.layout_figure(node_traces, go_edges)
 
         if set_default_graph is True:
             self.default_graph = graph
         return graph
-
+    
+    def layout_risk_3d(self, user_label):
+        position = {}
+        for user, label in user_label.items():
+            if label == 'non':
+                position[user] = (np.random.uniform(0., 0.5), np.random.uniform(0., 0.5), np.random.uniform(0., 0.5))
+            else:
+                position[user] = (np.random.uniform(0.5, 1.), np.random.uniform(0.5, 1.), np.random.uniform(0.5, 1.))
+        return position
 
     def get_random_position_2d(self, paths):
         digraph = self._init_digraph_(paths)
