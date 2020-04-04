@@ -1,5 +1,8 @@
 # **GRAPH NETWORK**
 
+This package is still on developing (do not use)
+
+
 ## **A. DEFINITION**
 ### **1. Graph Theory**
     Graph is defined as G = (V, E) where V is a set of all vertices and E is a set of all edges
