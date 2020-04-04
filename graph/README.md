@@ -31,13 +31,15 @@
 
 - Edges are ***adjacent*** if they share a common vertex
 
+- ***Pendant edge*** has an endpoint is pendant vertex
+
 ---
 
 *Graph*
 
-- ***Empty graph*** in which E is empty
-
 - ***Null graph*** in which both V and E are empty
+
+- ***Empty graph*** in which E is empty
 
 - ***Simple graph*** in which no parallel edges or loops
 
@@ -45,37 +47,6 @@
 
 - Graph is ***trivial*** if has only one vertex
 
-- ***Pendant edge*** has an endpoint is pendant vertex
-
-#### Graph traversal
-
-1. ***Walk*** is a sequence of vertices and edges where vertices and edges can be repeated
-
-    * *Opened* walk when starting vertex is not the same with ending vertex
-    * *Closed* walk when starting vertex is the same with ending vertex
-
-2. ***Trail*** is a walk but no repeated edges
-
-3. ***Circuit*** is a closed trail (only repeated vertices)
-
-4. ***Path*** is a trail but not repeated vertices (both vertices and edges not  repeated)
-
-5. ***Cycle*** is a path but starting and ending vertex must be the same
-
-<br>
-
-### **2. Graph Representation**
-- GRAPH
-    - A superclass for all kind of graphs
-
-- NODE 
-    - Presentation of an entity or instance 
-
-- EDGE
-    - Presentation of a connection between nodes
-    - Must have these attributes
-        - source = node_id
-        - target = node_id
 
 #### Graph variants
 - CONNECTED-GRAPH
@@ -96,6 +67,22 @@
 - COMPLETED-GRAPH
     - A graph in which all vertices is linked together by an edge. Total edges is n*(n-1)/2
 
+
+#### Graph traversal
+
+1. ***Walk*** is a sequence of vertices and edges where vertices and edges can be repeated
+
+    * *Opened* walk when starting vertex is not the same with ending vertex
+    * *Closed* walk when starting vertex is the same with ending vertex
+
+2. ***Trail*** is a walk but no repeated edges
+
+3. ***Circuit*** is a closed trail (only repeated vertices)
+
+4. ***Path*** is a trail but not repeated vertices (both vertices and edges not  repeated)
+
+5. ***Cycle*** is a path but starting and ending vertex must be the same
+
 #### Path
 
 - EULER 
@@ -107,6 +94,33 @@
 - HAMILTONIAN
 
     - A simple path in a graph G that passes through **every vertex exactly once** is called a Hamiltonian path
+
+<br>
+
+### **2. Graph Representation**
+- GRAPH
+    - A superclass for all kind of graphs
+
+- VERTEX 
+    - Presentation of an entity or instance 
+
+- EDGE
+    - Presentation of a connection between nodes
+    - Must have these attributes
+        - source = node_id
+        - target = node_id
+
+### **3. Data Structure for Graph**
+#### Input Format
+
+Vertex
+
+
+Edge
+- Full Matrix
+- Half Matrix (upper)
+- List of pairs of endpoints
+
 
 <br>
 

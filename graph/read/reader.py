@@ -28,18 +28,12 @@ Description:
 """
 
 
-class Read:
+class GraphReader():
     def __init__(self):
         pass
 
-class ReadStream(self):
-    def __init__(self):
+    def _prior_action_(self):
         pass
 
-class ReadFile(self):
-    def __init__(self):
-        pass
-
-class ReadDatabase(self):
-    def __init__(self):
+    def _post_action_(self):
         pass
