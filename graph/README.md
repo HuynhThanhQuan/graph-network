@@ -1,41 +1,122 @@
-# GRAPH NETWORK
+# **GRAPH NETWORK**
 
-## Definition
-### Graph Theory
-    A graph is defined as G = (V, E) where:
-        V: a set of all vertices
-        E: a set of all edges
+## **A. DEFINITION**
+### **1. Graph Theory**
+    Graph is defined as G = (V, E) where V is a set of all vertices and E is a set of all edges
 
-### Graph Representation
-    GRAPH
-        A superclass for all kind of graphs
-        A graph must have nodes (edges can be ignored)
+---
+*Vertex*
 
-    NODE 
-        Presentation of an entity or instance 
+- ***V = {a, b, c, d}***
 
-    EDGE
-        Presentation of a connection/linkage/relationships between nodes
-        Must have a '_source' and '_target' attributes, where values are ID of nodes
+- Two vertices of the edge called ***endpoints***
 
-    PATH
+- ***Isolated*** vertex has zero degree
+
+- Two vertices are ***adjacent*** if they share a common edge
+
+- ***Degree*** of vertex is the number of edges connected to the node (in/out-degree in directed graph)
+
+- ***Pendant*** vertex has one degree 
 
 
-### Graph variants
-    GRAPH can be distiguished to 2 types: DISCRETED-GRAPH and CONNECTED-GRAPH
+---
+*Edge*
 
-        DISCRETED-GRAPH
-            A graph that contains multi-subgraphs where subgraph can be a DISCRETED-GRAPH as well
+- ***E = {(a, b), (b, c), (c, d)}***
 
-        CONNECTED-GRAPH
-            A graph that is enclosured by nodes and edges, all nodes must have a connection to the graph by at least 1 edge
+- ***Loop*** is an edge formed by (a, a)
 
-#### Special Graph
-    UNDIRECTED-GRAPH
-        A CONNECTED-GRAPH with a path from A to B can be traversed back from B to A
+- ***Parallel*** edges has the same endpoints
 
-    DIRECTED-GRAPH
-        A CONNECTED-GRAPH with only has 1 path from A to B
+- Edges are ***adjacent*** if they share a common vertex
 
-    TREE
-        A DIRECTED-GRAPH
+---
+
+*Graph*
+
+- ***Empty graph*** in which E is empty
+
+- ***Null graph*** in which both V and E are empty
+
+- ***Simple graph*** in which no parallel edges or loops
+
+- ***Multigraph*** in which can contain multiple edges connect the same pair of endpoints
+
+- Graph is ***trivial*** if has only one vertex
+
+- ***Pendant edge*** has an endpoint is pendant vertex
+
+#### Graph traversal
+
+1. ***Walk*** is a sequence of vertices and edges where vertices and edges can be repeated
+
+    * *Opened* walk when starting vertex is not the same with ending vertex
+    * *Closed* walk when starting vertex is the same with ending vertex
+
+2. ***Trail*** is a walk but no repeated edges
+
+3. ***Circuit*** is a closed trail (only repeated vertices)
+
+4. ***Path*** is a trail but not repeated vertices (both vertices and edges not  repeated)
+
+5. ***Cycle*** is a path but starting and ending vertex must be the same
+
+<br>
+
+### **2. Graph Representation**
+- GRAPH
+    - A superclass for all kind of graphs
+
+- NODE 
+    - Presentation of an entity or instance 
+
+- EDGE
+    - Presentation of a connection between nodes
+    - Must have these attributes
+        - source = node_id
+        - target = node_id
+
+#### Graph variants
+- CONNECTED-GRAPH
+    - A graph that is enclosured by nodes and edges, all nodes must have at least 1 edge to the graph
+
+- DISCONNECTED-GRAPH
+    - A graph that can contains many sub-graphs or isolated nodes where subgraph can be a DISCONNECTED-GRAPH as well
+
+- UNDIRECTED-GRAPH
+    - A CONNECTED-GRAPH with a path from A to B can be traversed back from B to A
+
+- DIRECTED-GRAPH
+    - A CONNECTED-GRAPH with only has 1 path from A to B
+
+- TREE
+    - A DIRECTED-ACYCLIC-GRAPH but a child can have only one parent
+
+- COMPLETED-GRAPH
+    - A graph in which all vertices is linked together by an edge. Total edges is n*(n-1)/2
+
+#### Path
+
+- EULER 
+
+    - An Euler path is a path that uses **every edge exactly once**.
+
+    - An Euler path starts and ends at **different vertices**.
+
+- HAMILTONIAN
+
+    - A simple path in a graph G that passes through **every vertex exactly once** is called a Hamiltonian path
+
+<br>
+
+## **ALGORITHMS**
+
+
+
+<br>
+
+## **APPENDIX**
+- DIRECTED-ACYCLIC-GRAPH
+    - A DIRECTED-GRAPH without cycle. For a vertex A in DIRECTED-ACYCLIC-GRAPH, there is no directed edge starting and ending with vertex A
+
