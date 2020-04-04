@@ -2,7 +2,7 @@ import os
 import random
 import pandas as pd 
 import numpy as np
-from pseudo import graph_viz
+from fraud_det import graph_viz
 import uuid
 
 NUM_USER = 100
