@@ -42,13 +42,13 @@ This package is still on developing (do not use)
 
 - ***Null graph*** in which both V and E are empty
 
+- ***Trivial graph*** in which has only one vertex (isolated vertex)
+
 - ***Empty graph*** in which E is empty
 
 - ***Simple graph*** in which no parallel edges or loops
 
 - ***Multigraph*** in which can contain multiple edges connect the same pair of endpoints
-
-- Graph is ***trivial*** if has only one vertex
 
 
 #### Graph variants

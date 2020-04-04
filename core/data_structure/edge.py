@@ -9,3 +9,6 @@ class Loop(Edge):
 class ParallelEdge(Edge):
     pass
 
+
+class PendantEdge(Edge):
+    pass
