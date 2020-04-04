@@ -1,14 +1,4 @@
-### Python ###
 __pycache__/
-
-# Distribution/ packaging
-*.egg-info/
-.spyproject
 .idea/
-
-# Model Folders
-/graph/build/graph_storage/
-/bigdata/core/.temp/
-/venv/
-/graph/build/word2vec_model/
-/distributed/
+venv
+.vscode

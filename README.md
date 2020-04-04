@@ -1,82 +1,139 @@
-# KATALON INSIGHTS
+# **GRAPH NETWORK**
 
-https://insight-staging.katalon.com/
-
-**Description**: Setup Katalon Insights Django server
-
-------------------------------
-
-## CONFIGURE
-
-### Cloud Environment Config
-**Mount folder : Application File**
-Host  :  /workspace/
-Container Path :  /workspace/
-
-**Mount Folder: File System From EFS**
-Host : /hdf5files/
-Container Path :  /workspace/hdf5files
-
-EFS File System Name : Katalon-Insight
-
-/deloy/.ebextension/storage-efs-mountfilesystem.config :  this file will host to Host Server to folder "/hdf5files "
-
-Description :  When performing to run deploy Docker Cluster , base on file  _Dockerrun.aws.json to execute mount folder from host to docker.  It will be mounted from /hd5files to container path /workspace/hdf5files/
-
-### Environment
-
-Windows 10, 64 bit
-Python 3.6
-
-### Install dependencies
-
-```sh
-$ pip install -r requirements.txt
-```
-
-### Run server
-
-```sh
-$ python manage.py runserver 0:8000
-```
-
-## FEATURES
-1. Clustering
-2. Graph stacktrace (katalon-graph)
-3. Support big matrix calculation (katalon-graph)
-4. Image Comparison (not merged)
-5. Server performance analysis (pending)
-6. Test cases correlation analysis (pending)
+This package is still on developing (do not use)
 
 
-### Clustering
-1. Cluster Project ID
-```sh
-https://insight-staging.katalon.com/insights/cluster/project_id
+## **A. DEFINITION**
+### **1. Graph Theory**
+    Graph is defined as G = (V, E) where V is a set of all vertices and E is a set of all edges
 
-{
-  "projectId": 29539,
-  "SYSTEM_KEY": <SYSTEM_KEY>
-}
-```
-2. Cluster within intervals
-```sh
-https://insight-staging.katalon.com/insights/cluster/within_interval
+---
+*Vertex*
 
-{
-  "projectId": 29539,
-  "startTime": "2010-01-10 00:00:00",
-  "endTime": "2020-12-10 00:00:00",
-  "SYSTEM_KEY": <SYSTEM_KEY>
-}
-```
-3. Cluster execution
-```sh
-https://insight-staging.katalon.com/insights/cluster/execution_id
+- ***V = {a, b, c, d}***
 
-{
-  "projectId": 29539,
-  "executionId": 1753050,
-  "SYSTEM_KEY": <SYSTEM_KEY>
-}
-```
+- Two vertices of the edge called ***endpoints***
+
+- ***Isolated*** vertex has zero degree
+
+- Two vertices are ***adjacent*** if they share a common edge
+
+- ***Degree*** of vertex is the number of edges connected to the node (in/out-degree in directed graph)
+
+- ***Pendant*** vertex has one degree 
+
+
+---
+*Edge*
+
+- ***E = {(a, b), (b, c), (c, d)}***
+
+- ***Loop*** is an edge formed by (a, a)
+
+- ***Parallel*** edges has the same endpoints
+
+- Edges are ***adjacent*** if they share a common vertex
+
+- ***Pendant edge*** has an endpoint is pendant vertex
+
+---
+
+*Graph*
+
+- ***Null graph*** in which both V and E are empty
+
+- ***Empty graph*** in which E is empty
+
+- ***Simple graph*** in which no parallel edges or loops
+
+- ***Multigraph*** in which can contain multiple edges connect the same pair of endpoints
+
+- Graph is ***trivial*** if has only one vertex
+
+
+#### Graph variants
+- CONNECTED-GRAPH
+    - A graph that is enclosured by nodes and edges, all nodes must have at least 1 edge to the graph
+
+- DISCONNECTED-GRAPH
+    - A graph that can contains many sub-graphs or isolated nodes where subgraph can be a DISCONNECTED-GRAPH as well
+
+- UNDIRECTED-GRAPH
+    - A CONNECTED-GRAPH with a path from A to B can be traversed back from B to A
+
+- DIRECTED-GRAPH
+    - A CONNECTED-GRAPH with only has 1 path from A to B
+
+- TREE
+    - A DIRECTED-ACYCLIC-GRAPH but a child can have only one parent
+
+- COMPLETED-GRAPH
+    - A graph in which all vertices is linked together by an edge. Total edges is n*(n-1)/2
+
+
+#### Graph traversal
+
+1. ***Walk*** is a sequence of vertices and edges where vertices and edges can be repeated
+
+    * *Opened* walk when starting vertex is not the same with ending vertex
+    * *Closed* walk when starting vertex is the same with ending vertex
+
+2. ***Trail*** is a walk but no repeated edges
+
+3. ***Circuit*** is a closed trail (only repeated vertices)
+
+4. ***Path*** is a trail but not repeated vertices (both vertices and edges not  repeated)
+
+5. ***Cycle*** is a path but starting and ending vertex must be the same
+
+#### Path
+
+- EULER 
+
+    - An Euler path is a path that uses **every edge exactly once**.
+
+    - An Euler path starts and ends at **different vertices**.
+
+- HAMILTONIAN
+
+    - A simple path in a graph G that passes through **every vertex exactly once** is called a Hamiltonian path
+
+<br>
+
+### **2. Graph Representation**
+- GRAPH
+    - A superclass for all kind of graphs
+
+- VERTEX 
+    - Presentation of an entity or instance 
+
+- EDGE
+    - Presentation of a connection between nodes
+    - Must have these attributes
+        - source = node_id
+        - target = node_id
+
+### **3. Data Structure for Graph**
+#### Input Format
+
+Vertex
+
+
+Edge
+- Full Matrix
+- Half Matrix (upper)
+- List of pairs of endpoints
+
+
+<br>
+
+## **ALGORITHMS**
+
+
+
+<br>
+
+## **APPENDIX**
+- DIRECTED-ACYCLIC-GRAPH
+    - A DIRECTED-GRAPH without cycle. For a vertex A in DIRECTED-ACYCLIC-GRAPH, there is no directed edge starting and ending with vertex A
+
