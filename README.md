@@ -53,16 +53,16 @@ This package is still on developing (do not use)
 
 #### Graph variants
 - CONNECTED-GRAPH
-    - A graph that is enclosured by nodes and edges, all nodes must have at least 1 edge to the graph
+    - A graph that is enclosured by vertices and edges, all vertices must have at least 1 edge to the graph
 
 - DISCONNECTED-GRAPH
-    - A graph that can contains many sub-graphs or isolated nodes where subgraph can be a DISCONNECTED-GRAPH as well
+    - A graph that can contains many sub-graphs or isolated vertices where subgraph can be a DISCONNECTED-GRAPH as well
 
 - UNDIRECTED-GRAPH
-    - A CONNECTED-GRAPH with a path from A to B can be traversed back from B to A
+    - A CONNECTED-GRAPH in which every edge can be traversed forward and backward
 
 - DIRECTED-GRAPH
-    - A CONNECTED-GRAPH with only has 1 path from A to B
+    - A CONNECTED-GRAPH in which every edge can only be traversed in 1 direction
 
 - TREE
     - A DIRECTED-ACYCLIC-GRAPH but a child can have only one parent
@@ -108,7 +108,7 @@ This package is still on developing (do not use)
     - Presentation of an entity or instance 
 
 - EDGE
-    - Presentation of a connection between nodes
+    - Presentation of a connection between vertices
     - Must have these attributes
         - source = node_id
         - target = node_id

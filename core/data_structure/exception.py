@@ -78,3 +78,70 @@ class TrivialGraphHasZeroOrMoreThanOneVertices(GraphDataStructureException):
 class TrivialGraphHasEdge(GraphDataStructureException):
     def __init__(self, message='Trivial graph has no edge'):
         super().__init__(message)
+
+
+
+
+class DirectionalEdgeRequestReverse(GraphDataStructureException):
+    def __init__(self, message='Directional edge do not permit reverse traversal'):
+        super().__init__(message)
+
+
+class InputNullSourceEndpoint(GraphDataStructureException):
+    def __init__(self, message='Input source endpoint must not be null'):
+        super().__init__(message)
+
+
+class InputNullTargetEndpoint(GraphDataStructureException):
+    def __init__(self, message='Input target endpoint must not be null'):
+        super().__init__(message)
+
+
+class SourceEndpointNotVertexInstance(GraphDataStructureException):
+    def __init__(self, message='Source endpoint must be a Vertex instance'):
+        super().__init__(message)
+
+
+class TargetEndpointNotVertexInstance(GraphDataStructureException):
+    def __init__(self, message='Target endpoint must be a Vertex instance'):
+        super().__init__(message)
+
+
+class LoopHasDifferentEndpoints(GraphDataStructureException):
+    def __init__(self, message='Target endpoint must be a Vertex instance'):
+        super().__init__(message)
+
+
+class PendantEdgeMustConnectPendantVertex(GraphDataStructureException):
+    def __init__(self, message='Pendant edge must have pendant vertex'):
+        super().__init__(message)
+
+
+class ProhibitSubgraphInitialization(GraphDataStructureException):
+    def __init__(self, message='Prohibit initialize subgraph, subgraph must be detached from a super-graph'):
+        super().__init__(message)
+
+
+class InputInvalidVertexInstance(GraphDataStructureException):
+    def __init__(self, message='Input vertices must be instance of Vertex'):
+        super().__init__(message)
+
+
+class InputInvalidEdgeInstance(GraphDataStructureException):
+    def __init__(self, message='Input edges must be instance of Edge'):
+        super().__init__(message)
+
+
+class ConnectedGraphHasIsolatedVertex(GraphDataStructureException):
+    def __init__(self, message='Connected graph has isolated vertex'):
+        super().__init__(message)
+
+
+class DirectedGraphHasUndirectedEdge(GraphDataStructureException):
+    def __init__(self, message='All edges of Directed Graph must be Directional Edge instance'):
+        super().__init__(message)
+
+
+class TreeHasMoreThanOneParent(GraphDataStructureException):
+    def __init__(self, message='Tree must have only one parent and contain no cycle'):
+        super().__init__(message)
